@@ -1,0 +1,21 @@
+database='./data/';
+files=dir(database);
+n=length(files);
+stat=zeros(n,4);
+
+   block_size=3;
+for i=3:n
+    file=strcat(database,files(i).name);
+    I=imread(file);
+
+    %%Performing the enhancing method.
+    O=adapthisteq(I);
+    %%Computing the quantitative error measures.
+    [stat(i-2,1), quality_map] = imageQualityIndex (I, O, block_size);
+    %Enhancement Measure
+    stat(i-2,2)=EME(X,M,L)
+    %Absolute Mean Brightness Error
+    stat(i-2,3)=abs(mean2(I)-mean2(O));
+    %Discrete Entropy
+    stat(i-2,2)=entropy(O);
+end
