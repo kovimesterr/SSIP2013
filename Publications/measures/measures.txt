@@ -1,0 +1,4 @@
+Enhancement Measure (EME): eme.png
+Absolute Mean Brightness Error (AMBE): |E(X)-E(Y)|
+Discrete Entropy Difference (DED): H_i - H_o 
+Universal Image Quality Index (UIQI):  

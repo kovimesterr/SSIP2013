@@ -1,0 +1,12 @@
+I=imread('./data2/mdb115.pgm');
+%%Performing the enhancing method.
+H=hdTransform2(M,60,8);
+O1=adapthisteq(I+H);
+figure(1)
+subplot(121)
+subplot(12)
+
+J = imtophat(I,se);
+O2=I+J;
+figure(1)
+subplot(1,2,1)

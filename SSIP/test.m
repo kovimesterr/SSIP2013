@@ -1,5 +1,5 @@
 %%Setting the path of the database.
-database='./data/';
+database='./data2/';
 files=dir(database);
 
 %%Initializing parameters.
@@ -7,12 +7,17 @@ n=length(files);
 stat=zeros(n-2,6);
 block_size=3;
 
+se = strel('ball',12,50);
+
 for i=3:n
     file=strcat(database,files(i).name);
     I=imread(file);
 
     %%Performing the enhancing method.
-    O=adapthisteq(I);
+%     H=hdTransform2(M,60,8);
+%     O=adapthisteq(I+H);
+    J = imtophat(I,se);
+    O=I+J;
     %%Computing the quantitative error measures.
     [stat(i-2,1), quality_map] = imageQualityIndex (I, O, block_size);
     %Absolute Mean Brightness Error
@@ -25,5 +30,5 @@ for i=3:n
     stat(i-2,6)=entropy(O);
     
     %%Saving the data.
-    save('results.mat','stat');
+    save('results_tophat.mat','stat');
 end
